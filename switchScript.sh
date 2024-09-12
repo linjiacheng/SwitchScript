@@ -17,13 +17,9 @@ fi
 mkdir -p ./SwitchSD/atmosphere/config
 mkdir -p ./SwitchSD/atmosphere/hosts
 mkdir -p ./SwitchSD/atmosphere/contents/420000000007E51Anx-ovlloader
-mkdir -p ./SwitchSD/atmosphere/contents/0000000000534C56ReverseNX-RT
-mkdir -p ./SwitchSD/atmosphere/contents/4200000000000010ldn_mitm
 mkdir -p ./SwitchSD/atmosphere/contents/0100000000000352emuiibo
 mkdir -p ./SwitchSD/atmosphere/contents/0100000000000F12Fizeau
-mkdir -p ./SwitchSD/atmosphere/contents/4200000000000000sys-tune
 mkdir -p ./SwitchSD/atmosphere/contents/420000000000000Bsys-patch
-mkdir -p ./SwitchSD/atmosphere/contents/010000000000bd00MissionControl
 mkdir -p ./SwitchSD/atmosphere/contents/00FF0000636C6BFFsys-clk
 mkdir -p ./SwitchSD/atmosphere/kips
 mkdir -p ./SwitchSD/bootloader/payloads
@@ -34,10 +30,7 @@ mkdir -p ./SwitchSD/switch/HB-App-Store
 mkdir -p ./SwitchSD/switch/HekateToolbox
 mkdir -p ./SwitchSD/switch/JKSV
 mkdir -p ./SwitchSD/switch/Moonlight
-mkdir -p ./SwitchSD/switch/NXThemesInstaller
-mkdir -p ./SwitchSD/switch/SimpleModDownloader
 mkdir -p ./SwitchSD/switch/Switchfin
-mkdir -p ./SwitchSD/switch/tencent-switcher-gui
 mkdir -p ./SwitchSD/switch/wiliwili
 mkdir -p ./SwitchSD/switch/.overlays
 mkdir -p ./SwitchSD/switch/.packages
@@ -88,8 +81,8 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://hackintendo.com/download/sigpatches
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/sigpatches.zip -o sigpatches.zip
+### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip
+curl -sL https://sigmapatches.su/sigpatches.zip?06.11.2024 -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
@@ -100,7 +93,7 @@ else
 fi
 
 ### Fetch logo
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/theme/logo.zip -o logo.zip
+curl -sL https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/theme/logo.zip -o logo.zip
 if [ $? -ne 0 ]; then
     echo "logo download\033[31m failed\033[0m."
 else
@@ -184,22 +177,6 @@ else
     mv DBI.nro ./switch/DBI
 fi
 
-### Fetch lastest Awoo Installer from https://github.com/dragonflylee/Awoo-Installer/releases/latest
-curl -sL https://api.github.com/repos/dragonflylee/Awoo-Installer/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/dragonflylee/Awoo-Installer/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Awoo-Installer.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Awoo-Installer.zip
-if [ $? -ne 0 ]; then
-    echo "Awoo Installer download\033[31m failed\033[0m."
-else
-    echo "Awoo Installer download\033[32m success\033[0m."
-    unzip -oq Awoo-Installer.zip
-    rm Awoo-Installer.zip
-fi
-
 ### Fetch lastest Hekate-toolbox from https://github.com/WerWolv/Hekate-Toolbox/releases/latest
 curl -sL https://api.github.com/repos/WerWolv/Hekate-Toolbox/releases/latest \
   | jq '.tag_name' \
@@ -215,30 +192,20 @@ else
     mv HekateToolbox.nro ./switch/HekateToolbox
 fi
 
-### Fetch lastest NX-Activity-Log
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/NX-Activity-Log.zip -o NX-Activity-Log.zip
+### Fetch lastest NX-Activity-Log from https://github.com/zdm65477730/NX-Activity-Log/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo NX-Activity-Log {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o NX-Activity-Log.zip
 if [ $? -ne 0 ]; then
     echo "NX-Activity-Log download\033[31m failed\033[0m."
 else
     echo "NX-Activity-Log download\033[32m success\033[0m."
-    echo NX-Activity-Log >> ../description.txt
     unzip -oq NX-Activity-Log.zip
     rm NX-Activity-Log.zip
-fi
-
-### Fetch lastest NXThemesInstaller from https://github.com/exelix11/SwitchThemeInjector/releases/latest
-curl -sL https://api.github.com/repos/exelix11/SwitchThemeInjector/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo NXThemesInstaller {} >> ../description.txt
-curl -sL https://api.github.com/repos/exelix11/SwitchThemeInjector/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*NXThemesInstaller.nro"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o NXThemesInstaller.nro
-if [ $? -ne 0 ]; then
-    echo "NXThemesInstaller download\033[31m failed\033[0m."
-else
-    echo "NXThemesInstaller download\033[32m success\033[0m."
-    mv NXThemesInstaller.nro ./switch/NXThemesInstaller
 fi
 
 ### Fetch lastest JKSV from https://github.com/J-D-K/JKSV/releases/latest
@@ -254,21 +221,6 @@ if [ $? -ne 0 ]; then
 else
     echo "JKSV download\033[32m success\033[0m."
     mv JKSV.nro ./switch/JKSV
-fi
-
-### Fetch lastest tencent-switcher-gui from https://github.com/CaiMiao/Tencent-switcher-GUI/releases/latest
-curl -sL https://api.github.com/repos/CaiMiao/Tencent-switcher-GUI/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo tencent-switcher-gui {} >> ../description.txt
-curl -sL https://api.github.com/repos/CaiMiao/Tencent-switcher-GUI/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*tencent-switcher-gui.nro"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o tencent-switcher-gui.nro
-if [ $? -ne 0 ]; then
-    echo "tencent-switcher-gui download\033[31m failed\033[0m."
-else
-    echo "tencent-switcher-gui download\033[32m success\033[0m."
-    mv tencent-switcher-gui.nro ./switch/tencent-switcher-gui
 fi
 
 ### Fetch lastest aio-switch-updater from https://github.com/HamletDuFromage/aio-switch-updater/releases/latest
@@ -305,21 +257,6 @@ else
     rm wiliwili-NintendoSwitch.zip
 fi
 
-### Fetch lastest SimpleModDownloader from https://github.com/PoloNX/SimpleModDownloader/releases/latest
-curl -sL https://api.github.com/repos/PoloNX/SimpleModDownloader/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo SimpleModDownloader {} >> ../description.txt
-curl -sL https://api.github.com/repos/PoloNX/SimpleModDownloader/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*SimpleModDownloader.nro"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o SimpleModDownloader.nro
-if [ $? -ne 0 ]; then
-    echo "SimpleModDownloader download\033[31m failed\033[0m."
-else
-    echo "SimpleModDownloader download\033[32m success\033[0m."
-    mv SimpleModDownloader.nro ./switch/SimpleModDownloader
-fi
-
 ### Fetch lastest Switchfin from https://github.com/dragonflylee/switchfin/releases/latest
 curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest \
   | jq '.name' \
@@ -350,17 +287,6 @@ else
     mv Moonlight-Switch.nro ./switch/Moonlight
 fi
 
-### Fetch NX-Shell
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/NX-Shell.zip -o NX-Shell.zip
-if [ $? -ne 0 ]; then
-    echo "NX-Shell download\033[31m failed\033[0m."
-else
-    echo "NX-Shell download\033[32m success\033[0m."
-    echo NX-Shell >> ../description.txt
-    unzip -oq NX-Shell.zip
-    rm NX-Shell.zip
-fi
-
 ### Fetch lastest hb-appstore from https://github.com/fortheusers/hb-appstore/releases/latest
 curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest \
   | jq '.name' \
@@ -376,29 +302,14 @@ else
     mv appstore.nro ./switch/HB-App-Store
 fi
 
-### Fetch daybreak_x
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/daybreak_x.zip -o daybreak_x.zip
-if [ $? -ne 0 ]; then
-    echo "daybreak download\033[31m failed\033[0m."
-else
-    echo "daybreak download\033[32m success\033[0m."
-    unzip -oq daybreak_x.zip
-    rm daybreak_x.zip
-fi
-
-### Fetch lastest theme-patches from https://github.com/exelix11/theme-patches
-git clone https://github.com/exelix11/theme-patches
-if [ $? -ne 0 ]; then
-    echo "theme-patches download\033[31m failed\033[0m."
-else
-    echo "theme-patches download\033[32m success\033[0m."
-    mkdir themes
-    mv -f theme-patches/systemPatches ./themes/
-    rm -rf theme-patches
-fi
-
-### Fetch nx-ovlloader
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/nx-ovlloader.zip -o nx-ovlloader.zip
+### Fetch nx-ovlloader from https://github.com/ppkantorski/nx-ovlloader/releases/latest
+curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*nx-ovlloader.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o nx-ovlloader.zip
 if [ $? -ne 0 ]; then
     echo "nx-ovlloader download\033[31m failed\033[0m."
 else
@@ -428,78 +339,34 @@ else
     rm lang.zip
 fi
 
-### Fetch EdiZon
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/EdiZon.zip -o EdiZon.zip
-if [ $? -ne 0 ]; then
-    echo "EdiZon download\033[31m failed\033[0m."
-else
-    echo "EdiZon download\033[32m success\033[0m."
-    unzip -oq EdiZon.zip
-    rm EdiZon.zip
-fi
-
-### Fetch ovl-sysmodules
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/ovl-sysmodules.zip -o ovl-sysmodules.zip
-if [ $? -ne 0 ]; then
-    echo "ovl-sysmodules download\033[31m failed\033[0m."
-else
-    echo "ovl-sysmodules download\033[32m success\033[0m."
-    unzip -oq ovl-sysmodules.zip
-    rm ovl-sysmodules.zip
-fi
-
-### Fetch StatusMonitor
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/StatusMonitor.zip -o StatusMonitor.zip
-if [ $? -ne 0 ]; then
-    echo "StatusMonitor download\033[31m failed\033[0m."
-else
-    echo "StatusMonitor download\033[32m success\033[0m."
-    unzip -oq StatusMonitor.zip
-    rm StatusMonitor.zip
-fi
-
-### Fetch ReverseNX-RT
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/ReverseNX-RT.zip -o ReverseNX-RT.zip
-if [ $? -ne 0 ]; then
-    echo "ReverseNX-RT download\033[31m failed\033[0m."
-else
-    echo "ReverseNX-RT download\033[32m success\033[0m."
-    unzip -oq ReverseNX-RT.zip
-    rm ReverseNX-RT.zip
-fi
-
-### Fetch ldn_mitm
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/ldn_mitm.zip -o ldn_mitm.zip
-if [ $? -ne 0 ]; then
-    echo "ldn_mitm download\033[31m failed\033[0m."
-else
-    echo "ldn_mitm download\033[32m success\033[0m."
-    unzip -oq ldn_mitm.zip
-    rm ldn_mitm.zip
-fi
-
-### Fetch emuiibo
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/emuiibo.zip -o emuiibo.zip
+### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
+curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo emuiibo` {} >> ../description.txt
+curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o emuiibo.zip
 if [ $? -ne 0 ]; then
     echo "emuiibo download\033[31m failed\033[0m."
 else
     echo "emuiibo download\033[32m success\033[0m."
     unzip -oq emuiibo.zip
+    mv SdOut/atmosphere/contents/0100000000000352 ./atmosphere/contents
+    mv SdOut/emuiibo ./
+    mv SdOut/switch/.overlays/emuiibo.ovl ./switch/.overlays
+    rm -rf SdOut
     rm emuiibo.zip
 fi
 
-### Fetch QuickNTP
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/QuickNTP.zip -o QuickNTP.zip
-if [ $? -ne 0 ]; then
-    echo "QuickNTP download\033[31m failed\033[0m."
-else
-    echo "QuickNTP download\033[32m success\033[0m."
-    unzip -oq QuickNTP.zip
-    rm QuickNTP.zip
-fi
-
-### Fetch Fizeau
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/Fizeau.zip -o Fizeau.zip
+### Fetch lastest Fizeau from https://github.com/averne/Fizeau/releases/latest
+curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo Fizeau` {} >> ../description.txt
+curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau[^"]*.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o Fizeau.zip
 if [ $? -ne 0 ]; then
     echo "Fizeau download\033[31m failed\033[0m."
 else
@@ -508,44 +375,11 @@ else
     rm Fizeau.zip
 fi
 
-### Fetch Zing
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/Zing.zip -o Zing.zip
-if [ $? -ne 0 ]; then
-    echo "Zing download\033[31m failed\033[0m."
-else
-    echo "Zing download\033[32m success\033[0m."
-    unzip -oq Zing.zip
-    rm Zing.zip
-fi
-
-### Fetch lastest sys-tune from https://github.com/HookedBehemoth/sys-tune/releases/latest
-curl -sL https://api.github.com/repos/HookedBehemoth/sys-tune/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/HookedBehemoth/sys-tune/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*sys-tune[^"]*.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o sys-tune.zip
-if [ $? -ne 0 ]; then
-    echo "sys-tune download\033[31m failed\033[0m."
-else
-    echo "sys-tune download\033[32m success\033[0m."
-    unzip -oq sys-tune.zip
-    rm sys-tune.zip
-fi
-
 ###
 cat >> ../description.txt << ENDOFFILE
 nx-ovlloader
-EdiZon
-ovl-sysmodules
-StatusMonitor
-ReverseNX-RT
-ldn_mitm
 emuiibo
-QuickNTP
 Fizeau
-Zing
 ENDOFFILE
 
 ### Fetch sys-patch from https://github.com/impeeza/sys-patch/releases/latest
@@ -603,22 +437,6 @@ else
     unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
     rm kip.zip
     rm OC.Toolkit.u.zip
-fi
-
-### Fetch MissionControl from https://github.com/ndeadly/MissionControl/releases/latest
-curl -sL https://api.github.com/repos/ndeadly/MissionControl/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/ndeadly/MissionControl/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*MissionControl[^"]*.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o MissionControl.zip
-if [ $? -ne 0 ]; then
-    echo "MissionControl download\033[31m failed\033[0m."
-else
-    echo "MissionControl download\033[32m success\033[0m."
-    unzip -oq MissionControl.zip
-    rm MissionControl.zip
 fi
 
 ### Rename hekate_ctcaer_*.bin to payload.bin
@@ -800,7 +618,6 @@ fi
 ### Delete unneeded files
 rm -f switch/haze.nro
 rm -f switch/reboot_to_payload.nro
-rm -f switch/daybreak.nro
 
 # -------------------------------------------
 

@@ -14,43 +14,43 @@
   - Nro插件
     - [x] 联网检测是否屏蔽任天堂服务器 `Switch_90DNS_tester` [From Here](https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest)
     - [x] 游戏安装，存档管理和文件传输工具 `DBI` [From Here](https://github.com/rashevskyv/dbi/releases/latest)
-    - [x] 游戏安装和文件传输工具 `Awoo Installer` [From Here](https://github.com/dragonflylee/Awoo-Installer/releases/latest)
+    - [ ] ~~游戏安装和文件传输工具 `Awoo Installer` [From Here](https://github.com/dragonflylee/Awoo-Installer/releases/latest)~~
     - [x] 深海工具箱 `Hekate-toolbox` [From Here](https://github.com/WerWolv/Hekate-Toolbox/releases/latest)
     - [x] 游戏游玩时间记录工具 `NX-Activity-Log` [From Here](https://github.com/zdm65477730/NX-Activity-Log/releases/latest)
-    - [x] 主题安装工具 `NXThemesInstaller` [From Here](https://github.com/exelix11/SwitchThemeInjector/releases/latest)
+    - [ ] ~~主题安装工具 `NXThemesInstaller` [From Here](https://github.com/exelix11/SwitchThemeInjector/releases/latest)~~
     - [x] 游戏存档管理工具 `JKSV` [From Here](https://github.com/J-D-K/JKSV/releases/latest)
-    - [x] 系统切换工具 `tencent-switcher-gui` [From Here](https://github.com/CaiMiao/Tencent-switcher-GUI/releases/latest)
+    - [ ] ~~系统切换工具 `tencent-switcher-gui` [From Here](https://github.com/CaiMiao/Tencent-switcher-GUI/releases/latest)~~
     - [x] 多工具合一任天堂Switch更新器 `aio-switch-updater` [From Here](https://github.com/HamletDuFromage/aio-switch-updater/releases/latest)
     - [x] 第三方B站客户端 `wiliwili` [From Here](https://github.com/xfangfang/wiliwili/releases/latest)
-    - [x] Mod下载器 `SimpleModDownloader` [From Here](https://github.com/PoloNX/SimpleModDownloader/releases/latest)
+    - [ ] ~~Mod下载器 `SimpleModDownloader` [From Here](https://github.com/PoloNX/SimpleModDownloader/releases/latest)~~
     - [x] Jellyfin客户端 `Switchfin` [From Here](https://github.com/dragonflylee/switchfin/releases/latest)
     - [x] 串流工具 `Moonlight` [From Here](https://github.com/XITRIX/Moonlight-Switch/releases/latest)
-    - [x] 文件管理 `NX-Shell` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
+    - [ ] ~~文件管理 `NX-Shell` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
     - [x] 黑商店 `hb-appstore`  [From Here](https://github.com/fortheusers/hb-appstore/releases/latest)
-    - [x] 系统升级工具 `daybreak`  [From Here](https://www.tekqart.com/thread-258184-1-1.html)
+    - [ ] ~~系统升级工具 `daybreak`  [From Here](https://www.tekqart.com/thread-258184-1-1.html)~~
 
   - 补丁
-    - [x] 主题破解 `theme-patches` [From Here](https://github.com/exelix11/theme-patches)
+    - [ ] ~~主题破解 `theme-patches` [From Here](https://github.com/exelix11/theme-patches)~~
   - Ultrahand
-    - [x] 加载器 `nx-ovlloader` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
+    - [x] 加载器 `nx-ovlloader` [From Here](https://github.com/ppkantorski/nx-ovlloader/releases/latest)
     - [x] 菜单 `Ultrahand-Overlay` [From Here](https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest)
   - Ovl插件
-    - [x] 金手指工具 `EdiZon` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 系统模块 `ovl-sysmodules` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 系统监视 `StatusMonitor` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 掌机底座模式切换 `ReverseNX-RT` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 局域网联机 `ldn_mitm` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 虚拟Amiibo `emuiibo` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 时间同步 `QuickNTP` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 色彩调整 `Fizeau` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 金手指工具 `Zing` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
-    - [x] 后台音乐 `sys-tune` [From Here](https://www.tekqart.com/thread-370954-1-1.html)
+    - [ ] ~~金手指工具 `EdiZon` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~系统模块 `ovl-sysmodules` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~系统监视 `StatusMonitor` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~掌机底座模式切换 `ReverseNX-RT` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~局域网联机 `ldn_mitm` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/XorTroll/emuiibo/releases/latest)
+    - [ ] ~~时间同步 `QuickNTP` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [x] 色彩调整 `Fizeau` [From Here](https://github.com/averne/Fizeau/releases/latest)
+    - [ ] ~~金手指工具 `Zing` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~后台音乐 `sys-tune` [From Here](https://www.tekqart.com/thread-370954-1-1.html)~~
     - [x] 系统补丁 `sys-patch` [From Here](https://github.com/impeeza/sys-patch/releases/latest)
     - [x] 超频插件 `sys-clk` [From Here](https://github.com/retronx-team/sys-clk/releases/latest)
     - [x] 调频插件 `OC Toolkit` [From Here](https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest)
 
   - 其他
-    - [x] 蓝牙手柄插件 `MissionControl` [From Here](https://github.com/ndeadly/MissionControl/releases/latest)
+    - [ ] ~~蓝牙手柄插件 `MissionControl` [From Here](https://github.com/ndeadly/MissionControl/releases/latest)~~
 
 - 文件操作：
     - [x] 移动 `fusee.bin` 至 `bootloader/payloads` 文件夹
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2024-09-12 更新脚本，`精简+原版`，需要的ovl和nro插件可以从`hb-appstore`下载
 - 2024-08-26 更新脚本，修正 `OC Toolkit` 更新造成的运行错误
 - 2024-07-21 添加 `sys-clk`、`OC Toolkit`
 - 2024-07-16 更新脚本，替换 `Tesla-Menu` 为 `Ultrahand-Overlay`，去除 `sys-clk`
