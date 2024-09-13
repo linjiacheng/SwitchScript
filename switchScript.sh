@@ -87,7 +87,7 @@ if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
     echo "sigpatches download\033[32m success\033[0m."
-    echo sigpatches >> ../description.txt
+    echo sigpatches 06.11.2024 >> ../description.txt
     unzip -oq sigpatches.zip
     rm sigpatches.zip
 fi
@@ -304,8 +304,8 @@ fi
 
 ### Fetch nx-ovlloader from https://github.com/ppkantorski/nx-ovlloader/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo nx-ovlloader {} >> ../description.txt
 curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*nx-ovlloader.zip"' \
   | sed 's/"//g' \
@@ -342,7 +342,7 @@ fi
 ### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
 curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
   | jq '.name' \
-  | xargs -I {} echo emuiibo` {} >> ../description.txt
+  | xargs -I {} echo emuiibo {} >> ../description.txt
 curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
   | sed 's/"//g' \
@@ -361,8 +361,8 @@ fi
 
 ### Fetch lastest Fizeau from https://github.com/averne/Fizeau/releases/latest
 curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo Fizeau` {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo Fizeau {} >> ../description.txt
 curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau[^"]*.zip"' \
   | sed 's/"//g' \
@@ -374,13 +374,6 @@ else
     unzip -oq Fizeau.zip
     rm Fizeau.zip
 fi
-
-###
-cat >> ../description.txt << ENDOFFILE
-nx-ovlloader
-emuiibo
-Fizeau
-ENDOFFILE
 
 ### Fetch sys-patch from https://github.com/impeeza/sys-patch/releases/latest
 curl -sL https://api.github.com/repos/impeeza/sys-patch/releases/latest \
