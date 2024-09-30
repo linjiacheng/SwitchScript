@@ -81,7 +81,7 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip
+### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip?06.11.2024
 curl -sL https://sigmapatches.su/sigpatches.zip?06.11.2024 -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
@@ -102,19 +102,16 @@ else
     rm logo.zip
 fi
 
-### Fetch latest Lockpick_RCM.bin from https://github.com/Decscots/Lockpick_RCM/releases/latest
-curl -sL https://api.github.com/repos/Decscots/Lockpick_RCM/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Lockpick_RCM {} >> ../description.txt
-curl -sL https://api.github.com/repos/Decscots/Lockpick_RCM/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Lockpick_RCM.bin"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Lockpick_RCM.bin
+### Fetch latest Lockpick_RCM.bin from https://sigmapatches.su/Lockpick_RCM_v1.9.12.zip?12.30.2023
+curl -sL https://sigmapatches.su/Lockpick_RCM_v1.9.12.zip?12.30.2023 -o Lockpick_RCM.zip
 if [ $? -ne 0 ]; then
     echo "Lockpick_RCM download\033[31m failed\033[0m."
 else
     echo "Lockpick_RCM download\033[32m success\033[0m."
+    echo Lockpick_RCM 1.9.12 >> ../description.txt
+    unzip -oq Lockpick_RCM.zip
     mv Lockpick_RCM.bin ./bootloader/payloads
+    rm Lockpick_RCM*.zip
 fi
 
 ### Fetch latest TegraExplorer.bin form https://github.com/suchmememanyskill/TegraExplorer/releases/latest

@@ -6,9 +6,9 @@
   - 大气层三件套
     - [x] `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases/latest)
     - [x] `Hekate + Nyx 简体中文` [From Here](https://github.com/easyworld/hekate/releases/latest)
-    - [x] `Sigpatches` [From Here](https://hackintendo.com/download/sigpatches/)
+    - [x] `Sigpatches` [From Here](https://sigmapatches.su/sigpatches.zip?06.11.2024)
   - Payload插件
-    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/Decscots/Lockpick_RCM/releases/latest)
+    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://sigmapatches.su/Lockpick_RCM_v1.9.12.zip?12.30.2023)
     - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/suchmememanyskill/TegraExplorer/releases/latest)
     - [x] Hekate下删除主题和关闭插件自动启动 `CommonProblemResolver` [From Here](https://github.com/zdm65477730/CommonProblemResolver/releases/latest)
   - Nro插件
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2024-09-30 更新 `Lockpick_RCM` 下载链接
 - 2024-09-12 更新脚本，`精简+原版`，需要的ovl和nro插件可以从`hb-appstore`下载
 - 2024-08-26 更新脚本，修正 `OC Toolkit` 更新造成的运行错误
 - 2024-07-21 添加 `sys-clk`、`OC Toolkit`
