@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2024-10-23 更新 `Atmosphère`、`sigpatches`、`NX-Activity-Log` 下载链接
 - 2024-09-30 更新 `Lockpick_RCM` 下载链接
 - 2024-09-12 更新脚本，`精简+原版`，需要的ovl和nro插件可以从`hb-appstore`下载
 - 2024-08-26 更新脚本，修正 `OC Toolkit` 更新造成的运行错误

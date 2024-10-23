@@ -28,6 +28,7 @@ mkdir -p ./SwitchSD/switch/Switch_90DNS_tester
 mkdir -p ./SwitchSD/switch/DBI
 mkdir -p ./SwitchSD/switch/HB-App-Store
 mkdir -p ./SwitchSD/switch/HekateToolbox
+mkdir -p ./SwitchSD/switch/NX-Activity-Log
 mkdir -p ./SwitchSD/switch/JKSV
 mkdir -p ./SwitchSD/switch/Moonlight
 mkdir -p ./SwitchSD/switch/Switchfin
@@ -37,11 +38,12 @@ mkdir -p ./SwitchSD/switch/.packages
 
 cd SwitchSD
 
-### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
+### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
+  | jq '.[0].tag_name' \
+  | xargs -I {} echo Atmosphère {} >> ../description.txt
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
+  | jq '.[0].assets' \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*atmosphere[^"]*.zip' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o atmosphere.zip
@@ -53,8 +55,9 @@ else
     rm atmosphere.zip
 fi
 
-### Fetch latest fusee.bin from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
+### Fetch latest fusee.bin from https://github.com/Atmosphere-NX/Atmosphere/releases
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
+  | jq '.[0].assets' \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*fusee.bin"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o fusee.bin
@@ -81,13 +84,13 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip?06.11.2024
-curl -sL https://sigmapatches.su/sigpatches.zip?06.11.2024 -o sigpatches.zip
+### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip?16.10.2024
+curl -sL https://sigmapatches.su/sigpatches.zip?16.10.2024 -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
     echo "sigpatches download\033[32m success\033[0m."
-    echo sigpatches 06.11.2024 >> ../description.txt
+    echo sigpatches 16.10.2024 >> ../description.txt
     unzip -oq sigpatches.zip
     rm sigpatches.zip
 fi
@@ -194,15 +197,14 @@ curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/lates
   | jq '.name' \
   | xargs -I {} echo NX-Activity-Log {} >> ../description.txt
 curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.zip"' \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.nro"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o NX-Activity-Log.zip
+  | xargs -I {} curl -sL {} -o NX-Activity-Log.nro
 if [ $? -ne 0 ]; then
     echo "NX-Activity-Log download\033[31m failed\033[0m."
 else
     echo "NX-Activity-Log download\033[32m success\033[0m."
-    unzip -oq NX-Activity-Log.zip
-    rm NX-Activity-Log.zip
+    mv NX-Activity-Log.nro ./switch/NX-Activity-Log
 fi
 
 ### Fetch lastest JKSV from https://github.com/J-D-K/JKSV/releases/latest
