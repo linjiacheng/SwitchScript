@@ -84,13 +84,13 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://sigmapatches.su/sigpatches.zip?16.10.2024
-curl -sL https://sigmapatches.su/sigpatches.zip?16.10.2024 -o sigpatches.zip
+### Fetch Sigpatches from https://hackintendo.com/download/sigpatches/
+curl -sL "https://hackintendo.com/download/sigpatches/?wpdmdl=400&refresh=676231211c06a1734488353" -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
     echo "sigpatches download\033[32m success\033[0m."
-    echo sigpatches 16.10.2024 >> ../description.txt
+    echo sigpatches  >> ../description.txt
     unzip -oq sigpatches.zip
     rm sigpatches.zip
 fi

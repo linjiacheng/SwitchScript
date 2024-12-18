@@ -6,7 +6,7 @@
   - 大气层三件套
     - [x] `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases/latest)
     - [x] `Hekate + Nyx 简体中文` [From Here](https://github.com/easyworld/hekate/releases/latest)
-    - [x] `Sigpatches` [From Here](https://sigmapatches.su/sigpatches.zip?06.11.2024)
+    - [x] `Sigpatches` [From Here](https://hackintendo.com/download/sigpatches)
   - Payload插件
     - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/saneki/Lockpick_RCM/releases/latest)
     - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/suchmememanyskill/TegraExplorer/releases/latest)
@@ -70,7 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
-- 2024-12-18 添加 `sysmodules`、`StatusMonitor`
+- 2024-12-18 更新 `sigpatches`下载链接，添加 `sysmodules`、`StatusMonitor`
 - 2024-12-11 更新 `Lockpick_RCM` 仓库地址，降级 `DBI` 至版本658
 - 2024-10-29 更新脚本，修正 `sys-patch` 文件更新造成的运行错误
 - 2024-10-23 更新 `Atmosphère`、`sigpatches`、`NX-Activity-Log` 下载链接
