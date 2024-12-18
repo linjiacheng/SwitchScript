@@ -377,6 +377,36 @@ else
     rm Fizeau.zip
 fi
 
+### Fetch ovlSysmodules
+curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
+  | jq '.tag_name' \
+  | xargs -I {} echo ovlSysmodules {} >> ../description.txt
+curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o ovlSysmodules.ovl
+if [ $? -ne 0 ]; then
+    echo "ovlSysmodules download\033[31m failed\033[0m."
+else
+    echo "ovlSysmodules download\033[32m success\033[0m."
+    mv ovlSysmodules.ovl ./switch/.overlays
+fi
+
+### Fetch Status-Monitor-Overlay
+curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o Status-Monitor-Overlay.ovl
+if [ $? -ne 0 ]; then
+    echo "Status-Monitor-Overlay download\033[31m failed\033[0m."
+else
+    echo "Status-Monitor-Overlay download\033[32m success\033[0m."
+    mv Status-Monitor-Overlay.ovl ./switch/.overlays
+fi
+
 ### Fetch sys-patch from https://github.com/impeeza/sys-patch/releases/latest
 curl -sL https://api.github.com/repos/impeeza/sys-patch/releases/latest \
   | jq '.tag_name' \

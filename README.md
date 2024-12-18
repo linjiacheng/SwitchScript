@@ -36,8 +36,8 @@
     - [x] 菜单 `Ultrahand-Overlay` [From Here](https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest)
   - Ovl插件
     - [ ] ~~金手指工具 `EdiZon` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [ ] ~~系统模块 `ovl-sysmodules` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [ ] ~~系统监视 `StatusMonitor` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] 系统模块 `ovl-sysmodules` [From Here](https://github.com/ppkantorski/ovl-sysmodules/releases/latest)
+    - [ ] 系统监视 `StatusMonitor` [From Here](https://github.com/ppkantorski/Status-Monitor-Overlay/releases/latest)
     - [ ] ~~掌机底座模式切换 `ReverseNX-RT` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
     - [ ] ~~局域网联机 `ldn_mitm` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
     - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/XorTroll/emuiibo/releases/latest)
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2024-12-18 添加 `sysmodules`、`StatusMonitor`
 - 2024-12-11 更新 `Lockpick_RCM` 仓库地址，降级 `DBI` 至版本658
 - 2024-10-29 更新脚本，修正 `sys-patch` 文件更新造成的运行错误
 - 2024-10-23 更新 `Atmosphère`、`sigpatches`、`NX-Activity-Log` 下载链接
