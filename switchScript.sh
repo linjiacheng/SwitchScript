@@ -14,36 +14,15 @@ fi
 if [ -e description.txt ]; then
   rm -rf description.txt
 fi
-mkdir -p ./SwitchSD/atmosphere/config
-mkdir -p ./SwitchSD/atmosphere/hosts
-mkdir -p ./SwitchSD/atmosphere/contents/420000000007E51Anx-ovlloader
-mkdir -p ./SwitchSD/atmosphere/contents/0100000000000352emuiibo
-mkdir -p ./SwitchSD/atmosphere/contents/0100000000000F12Fizeau
-mkdir -p ./SwitchSD/atmosphere/contents/420000000000000Bsys-patch
-mkdir -p ./SwitchSD/atmosphere/contents/00FF0000636C6BFFsys-clk
-mkdir -p ./SwitchSD/atmosphere/kips
-mkdir -p ./SwitchSD/bootloader/payloads
-mkdir -p ./SwitchSD/config/ultrahand/lang
-mkdir -p ./SwitchSD/switch/Switch_90DNS_tester
-mkdir -p ./SwitchSD/switch/DBI
-mkdir -p ./SwitchSD/switch/HB-App-Store
-mkdir -p ./SwitchSD/switch/HekateToolbox
-mkdir -p ./SwitchSD/switch/NX-Activity-Log
-mkdir -p ./SwitchSD/switch/JKSV
-mkdir -p ./SwitchSD/switch/Moonlight
-mkdir -p ./SwitchSD/switch/Switchfin
-mkdir -p ./SwitchSD/switch/wiliwili
-mkdir -p ./SwitchSD/switch/.overlays
-mkdir -p ./SwitchSD/switch/.packages
 
+mkdir -p SwitchSD
 cd SwitchSD
 
-### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
-  | jq '.[0].tag_name' \
-  | xargs -I {} echo Atmosphère {} >> ../description.txt
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
-  | jq '.[0].assets' \
+### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*atmosphere[^"]*.zip' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o atmosphere.zip
@@ -55,20 +34,7 @@ else
     rm atmosphere.zip
 fi
 
-### Fetch latest fusee.bin from https://github.com/Atmosphere-NX/Atmosphere/releases
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
-  | jq '.[0].assets' \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*fusee.bin"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o fusee.bin
-if [ $? -ne 0 ]; then
-    echo "fusee download\033[31m failed\033[0m."
-else
-    echo "fusee download\033[32m success\033[0m."
-    mv fusee.bin ./bootloader/payloads
-fi
-
-### Fetch Hekate + Nyx CHS from https://api.github.com/repos/easyworld/hekate/releases/latest
+### Fetch Hekate + Nyx CHS from https://github.com/easyworld/hekate/releases/latest
 curl -sL https://api.github.com/repos/easyworld/hekate/releases/latest \
   | jq '.name' \
   | xargs -I {} echo {} >> ../description.txt
@@ -95,14 +61,18 @@ else
     rm sigpatches.zip
 fi
 
-### Fetch logo
-curl -sL https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/theme/logo.zip -o logo.zip
+mkdir -p ./bootloader/payloads
+
+### Fetch latest fusee.bin from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*fusee.bin"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o fusee.bin
 if [ $? -ne 0 ]; then
-    echo "logo download\033[31m failed\033[0m."
+    echo "fusee download\033[31m failed\033[0m."
 else
-    echo "logo download\033[32m success\033[0m."
-    unzip -oq logo.zip
-    rm logo.zip
+    echo "fusee download\033[32m success\033[0m."
+    mv fusee.bin ./bootloader/payloads
 fi
 
 ### Fetch latest Lockpick_RCM.bin https://github.com/saneki/Lockpick_RCM/releases/latest
@@ -150,7 +120,17 @@ else
     mv CommonProblemResolver.bin ./bootloader/payloads
 fi
 
-### Fetch lastest Switch_90DNS_tester
+### Fetch logo
+curl -sL https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/theme/logo.zip -o logo.zip
+if [ $? -ne 0 ]; then
+    echo "logo download\033[31m failed\033[0m."
+else
+    echo "logo download\033[32m success\033[0m."
+    unzip -oq logo.zip
+    rm logo.zip
+fi
+
+### Fetch lastest Switch_90DNS_tester from https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest
 curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
   | jq '.tag_name' \
   | xargs -I {} echo Switch_90DNS_tester {} >> ../description.txt
@@ -162,14 +142,15 @@ if [ $? -ne 0 ]; then
     echo "Switch_90DNS_tester download\033[31m failed\033[0m."
 else
     echo "Switch_90DNS_tester download\033[32m success\033[0m."
+    mkdir -p ./switch/Switch_90DNS_tester
     mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
 fi
 
-### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/tag/658
-curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
+### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/latest
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
+  | jq '.tag_name' \
+  | xargs -I {} echo DBI {} >> ../description.txt
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o DBI.nro
@@ -177,6 +158,7 @@ if [ $? -ne 0 ]; then
     echo "DBI download\033[31m failed\033[0m."
 else
     echo "DBI download\033[32m success\033[0m."
+    mkdir -p ./switch/DBI
     mv DBI.nro ./switch/DBI
 fi
 
@@ -197,7 +179,7 @@ fi
 
 ### Fetch lastest NX-Activity-Log from https://github.com/zdm65477730/NX-Activity-Log/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
-  | jq '.name' \
+  | jq '.tag_name' \
   | xargs -I {} echo NX-Activity-Log {} >> ../description.txt
 curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.nro"' \
@@ -207,12 +189,13 @@ if [ $? -ne 0 ]; then
     echo "NX-Activity-Log download\033[31m failed\033[0m."
 else
     echo "NX-Activity-Log download\033[32m success\033[0m."
+    mkdir -p ./switch/NX-Activity-Log
     mv NX-Activity-Log.nro ./switch/NX-Activity-Log
 fi
 
 ### Fetch lastest JKSV from https://github.com/J-D-K/JKSV/releases/latest
 curl -sL https://api.github.com/repos/J-D-K/JKSV/releases/latest \
-  | jq '.name' \
+  | jq '.tag_name' \
   | xargs -I {} echo JKSV {} >> ../description.txt
 curl -sL https://api.github.com/repos/J-D-K/JKSV/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*JKSV.nro"' \
@@ -222,6 +205,7 @@ if [ $? -ne 0 ]; then
     echo "JKSV download\033[31m failed\033[0m."
 else
     echo "JKSV download\033[32m success\033[0m."
+    mkdir -p ./switch/JKSV
     mv JKSV.nro ./switch/JKSV
 fi
 
@@ -253,7 +237,8 @@ if [ $? -ne 0 ]; then
     echo "wiliwili download\033[31m failed\033[0m."
 else
     echo "wiliwili download\033[32m success\033[0m."
-    unzip -oq wiliwili-NintendoSwitch.zip
+    unzip -oq wiliwili-NintendoSwitch.zip    
+    mkdir -p ./switch/wiliwili
     mv wiliwili/wiliwili.nro ./switch/wiliwili
     rm -rf wiliwili
     rm wiliwili-NintendoSwitch.zip
@@ -261,8 +246,8 @@ fi
 
 ### Fetch lastest Switchfin from https://github.com/dragonflylee/switchfin/releases/latest
 curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo Switchfin {} >> ../description.txt
 curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*Switchfin.nro"' \
   | sed 's/"//g' \
@@ -271,6 +256,7 @@ if [ $? -ne 0 ]; then
     echo "Switchfin download\033[31m failed\033[0m."
 else
     echo "Switchfin download\033[32m success\033[0m."
+    mkdir -p ./switch/Switchfin
     mv Switchfin.nro ./switch/Switchfin
 fi
 
@@ -286,13 +272,14 @@ if [ $? -ne 0 ]; then
     echo "Moonlight download\033[31m failed\033[0m."
 else
     echo "Moonlight download\033[32m success\033[0m."
-    mv Moonlight-Switch.nro ./switch/Moonlight
+    mkdir -p ./switch/Moonlight-Switch
+    mv Moonlight-Switch.nro ./switch/Moonlight-Switch
 fi
 
 ### Fetch lastest hb-appstore from https://github.com/fortheusers/hb-appstore/releases/latest
 curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo HB-App-Store {} >> ../description.txt
 curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*appstore.nro"' \
   | sed 's/"//g' \
@@ -301,6 +288,7 @@ if [ $? -ne 0 ]; then
     echo "hb-appstore download\033[31m failed\033[0m."
 else
     echo "hb-appstore download\033[32m success\033[0m."
+    mkdir -p ./switch/HB-App-Store
     mv appstore.nro ./switch/HB-App-Store
 fi
 
@@ -316,14 +304,17 @@ if [ $? -ne 0 ]; then
     echo "nx-ovlloader download\033[31m failed\033[0m."
 else
     echo "nx-ovlloader download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/420000000007E51Anx-ovlloader
     unzip -oq nx-ovlloader.zip
     rm nx-ovlloader.zip
 fi
 
+mkdir -p ./switch/.overlays
+
 ### Fetch lastest Ultrahand-Overlay from https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo Ultrahand Overlay {} >> ../description.txt
 curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*lang.zip"' \
   | sed 's/"//g' \
@@ -336,6 +327,7 @@ if [ $? -ne 0 ]; then
     echo "Ultrahand-Overlay download\033[31m failed\033[0m."
 else
     echo "Ultrahand-Overlay download\033[32m success\033[0m."
+    mkdir -p ./config/ultrahand/lang
     unzip -oq lang.zip -d ./config/ultrahand/lang/
     mv ovlmenu.ovl ./switch/.overlays
     rm lang.zip
@@ -343,7 +335,7 @@ fi
 
 ### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
 curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
-  | jq '.name' \
+  | jq '.tag_name' \
   | xargs -I {} echo emuiibo {} >> ../description.txt
 curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
@@ -353,6 +345,7 @@ if [ $? -ne 0 ]; then
     echo "emuiibo download\033[31m failed\033[0m."
 else
     echo "emuiibo download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/0100000000000352emuiibo
     unzip -oq emuiibo.zip
     mv SdOut/atmosphere/contents/0100000000000352 ./atmosphere/contents
     mv SdOut/emuiibo ./
@@ -373,14 +366,15 @@ if [ $? -ne 0 ]; then
     echo "Fizeau download\033[31m failed\033[0m."
 else
     echo "Fizeau download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/0100000000000F12Fizeau
     unzip -oq Fizeau.zip
     rm Fizeau.zip
 fi
 
-### Fetch ovlSysmodules
+### Fetch ovlSysmodules from https://github.com/ppkantorski/ovl-sysmodules/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
   | jq '.tag_name' \
-  | xargs -I {} echo ovlSysmodules {} >> ../description.txt
+  | xargs -I {} echo Sysmodules {} >> ../description.txt
 curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
   | sed 's/"//g' \
@@ -392,10 +386,10 @@ else
     mv ovlSysmodules.ovl ./switch/.overlays
 fi
 
-### Fetch Status-Monitor-Overlay
+### Fetch Status-Monitor-Overlay from https://github.com/ppkantorski/Status-Monitor-Overlay/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo Status-Monitor-Overlay {} >> ../description.txt
 curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
   | sed 's/"//g' \
@@ -419,6 +413,7 @@ if [ $? -ne 0 ]; then
     echo "sys-patch download\033[31m failed\033[0m."
 else
     echo "sys-patch download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/420000000000000Bsys-patch
     unzip -oq sys-patch.zip
     rm sys-patch.zip
 fi
@@ -435,6 +430,7 @@ if [ $? -ne 0 ]; then
     echo "sys-clk download\033[31m failed\033[0m."
 else
     echo "sys-clk download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/00FF0000636C6BFFsys-clk
     unzip -oq sys-clk.zip
     rm sys-clk.zip
     rm README.md
@@ -442,8 +438,8 @@ fi
 
 ### Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
 curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo OC Toolkit {} >> ../description.txt
 curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip"' \
   | sed 's/"//g' \
@@ -456,7 +452,9 @@ if [ $? -ne 0 ]; then
     echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
 else
     echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/kips
     unzip -oq kip.zip -d ./atmosphere/kips/
+    mkdir -p ./switch/.packages
     unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
     rm kip.zip
     rm OC.Toolkit.u.zip
@@ -540,6 +538,7 @@ else
 fi
 
 ### Write emummc.txt & sysmmc.txt in /atmosphere/hosts
+mkdir -p ./atmosphere/hosts
 cat > ./atmosphere/hosts/emummc.txt << ENDOFFILE
 # 屏蔽任天堂服务器
 127.0.0.1 *nintendo.*
@@ -575,6 +574,7 @@ else
     echo "Writing boot.ini in root of SD card\033[32m success\033[0m."
 fi
 
+mkdir -p ./atmosphere/config
 ### Write override_config.ini in /atmosphere/config
 cat > ./atmosphere/config/override_config.ini << ENDOFFILE
 [hbl_config]

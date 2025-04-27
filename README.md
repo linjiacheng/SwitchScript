@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-04-27 整理脚本，更新`DBI`至最新版
 - 2024-12-18 更新 `sigpatches`下载链接，添加 `sysmodules`、`StatusMonitor`
 - 2024-12-11 更新 `Lockpick_RCM` 仓库地址，降级 `DBI` 至版本658
 - 2024-10-29 更新脚本，修正 `sys-patch` 文件更新造成的运行错误
