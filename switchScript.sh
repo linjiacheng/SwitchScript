@@ -47,6 +47,13 @@ if [ $? -ne 0 ]; then
 else
     echo "Hekate + Nyx CHS download\033[32m success\033[0m."
     unzip -oq hekate.zip
+    ### Rename hekate_ctcaer_*.bin to payload.bin
+    find . -name "*hekate_ctcaer*" -exec mv {} payload.bin \;
+    if [ $? -ne 0 ]; then
+        echo "Rename hekate_ctcaer_*.bin to payload.bin\033[31m failed\033[0m."
+    else
+        echo "Rename hekate_ctcaer_*.bin to payload.bin\033[32m success\033[0m."
+    fi
     rm hekate.zip
 fi
 
@@ -458,14 +465,6 @@ else
     unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
     rm kip.zip
     rm OC.Toolkit.u.zip
-fi
-
-### Rename hekate_ctcaer_*.bin to payload.bin
-find . -name "*hekate_ctcaer*" -exec mv {} payload.bin \;
-if [ $? -ne 0 ]; then
-    echo "Rename hekate_ctcaer_*.bin to payload.bin\033[31m failed\033[0m."
-else
-    echo "Rename hekate_ctcaer_*.bin to payload.bin\033[32m success\033[0m."
 fi
 
 ### Write hekate_ipl.ini in /bootloader/
