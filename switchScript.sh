@@ -47,6 +47,13 @@ if [ $? -ne 0 ]; then
 else
     echo "Hekate + Nyx CHS download\033[32m success\033[0m."
     unzip -oq hekate.zip
+    ### Rename hekate_ctcaer_*.bin to payload.bin
+    find . -name "*hekate_ctcaer*" -exec mv {} payload.bin \;
+    if [ $? -ne 0 ]; then
+        echo "Rename hekate_ctcaer_*.bin to payload.bin\033[31m failed\033[0m."
+    else
+        echo "Rename hekate_ctcaer_*.bin to payload.bin\033[32m success\033[0m."
+    fi
     rm hekate.zip
 fi
 
@@ -173,7 +180,8 @@ curl -sL https://api.github.com/repos/WerWolv/Hekate-Toolbox/releases/latest \
 if [ $? -ne 0 ]; then
     echo "HekateToolbox download\033[31m failed\033[0m."
 else
-    echo "HekateToolbox download\033[32m success\033[0m."
+    echo "HekateToolbox download\033[32m success\033[0m."    
+    mkdir -p ./switch/HekateToolbox
     mv HekateToolbox.nro ./switch/HekateToolbox
 fi
 
@@ -437,36 +445,28 @@ else
 fi
 
 ### Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
-curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo OC Toolkit {} >> ../description.txt
-curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o kip.zip
-curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*OC.Toolkit.u.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o OC.Toolkit.u.zip
-if [ $? -ne 0 ]; then
-    echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
-else
-    echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
-    mkdir -p ./atmosphere/kips
-    unzip -oq kip.zip -d ./atmosphere/kips/
-    mkdir -p ./switch/.packages
-    unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
-    rm kip.zip
-    rm OC.Toolkit.u.zip
-fi
-
-### Rename hekate_ctcaer_*.bin to payload.bin
-find . -name "*hekate_ctcaer*" -exec mv {} payload.bin \;
-if [ $? -ne 0 ]; then
-    echo "Rename hekate_ctcaer_*.bin to payload.bin\033[31m failed\033[0m."
-else
-    echo "Rename hekate_ctcaer_*.bin to payload.bin\033[32m success\033[0m."
-fi
+# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+#   | jq '.tag_name' \
+#   | xargs -I {} echo OC Toolkit {} >> ../description.txt
+# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o kip.zip
+# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*OC.Toolkit.u.zip"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o OC.Toolkit.u.zip
+# if [ $? -ne 0 ]; then
+#     echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
+# else
+#     echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
+#     mkdir -p ./atmosphere/kips
+#     unzip -oq kip.zip -d ./atmosphere/kips/
+#     mkdir -p ./switch/.packages
+#     unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
+#     rm kip.zip
+#     rm OC.Toolkit.u.zip
+# fi
 
 ### Write hekate_ipl.ini in /bootloader/
 cat > ./bootloader/hekate_ipl.ini << ENDOFFILE
@@ -489,7 +489,7 @@ payload=bootloader/payloads/fusee.bin
 emummcforce=1
 fss0=atmosphere/package3
 kip1patch=nosigchk
-kip1=atmosphere/kips/loader.kip
+; kip1=atmosphere/kips/loader.kip
 atmosphere=1
 icon=bootloader/res/icon_Atmosphere_emunand.bmp
 id=cfw-emu
