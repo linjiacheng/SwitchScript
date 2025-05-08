@@ -47,7 +47,7 @@
     - [ ] ~~后台音乐 `sys-tune` [From Here](https://www.tekqart.com/thread-370954-1-1.html)~~
     - [x] 系统补丁 `sys-patch` [From Here](https://github.com/impeeza/sys-patch/releases/latest)
     - [x] 超频插件 `sys-clk` [From Here](https://github.com/retronx-team/sys-clk/releases/latest)
-    - [x] 调频插件 `OC Toolkit` [From Here](https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest)
+    - [x] ~~调频插件 `OC Toolkit` [From Here](https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest)~~
 
   - 其他
     - [ ] ~~蓝牙手柄插件 `MissionControl` [From Here](https://github.com/ndeadly/MissionControl/releases/latest)~~
@@ -62,7 +62,7 @@
     - [x] 在 `atmosphere/config` 文件夹中创建 `override_config.ini`
     - [x] 在 `atmosphere/config` 文件夹中创建 `system_settings.ini`
     - [x] 删除 `switch` 文件夹中 `haze.nro`
-    - [x] 删除 `switch` 文件夹中 `daybreak.nro`
+    - [x] ~~删除 `switch` 文件夹中 `daybreak.nro`~~
     - [x] 删除 `switch` 文件夹中 `reboot_to_payload.nro`
 
 ## 使用说明（仅适用于 `Linux` ，科学上网环境）:
