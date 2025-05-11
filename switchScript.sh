@@ -18,11 +18,12 @@ fi
 mkdir -p SwitchSD
 cd SwitchSD
 
-### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
-  | jq '.name' \
+### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
+  | jq '.[0].name' \
   | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest \
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
+  | jq '.[0]' \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*atmosphere[^"]*.zip' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o atmosphere.zip
@@ -57,8 +58,8 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://hackintendo.com/download/sigpatches/
-curl -sL "https://hackintendo.com/download/sigpatches/?wpdmdl=400&refresh=676231211c06a1734488353" -o sigpatches.zip
+### Fetch Sigpatches from https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543/
+curl -sL "https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/plugins/Hekate+AMS-package3-sigpatches-1.9.0P-cfw-20.0.1_V1.zip" -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
@@ -82,19 +83,21 @@ else
     mv fusee.bin ./bootloader/payloads
 fi
 
-### Fetch latest Lockpick_RCM.bin https://github.com/saneki/Lockpick_RCM/releases/latest
-curl -sL https://api.github.com/repos/saneki/Lockpick_RCM/releases/latest \
+### Fetch latest Lockpick_RCM.bin https://github.com/impeeza/Lockpick_RCMDecScots/releases/latest
+curl -sL https://api.github.com/repos/impeeza/Lockpick_RCMDecScots/releases/latest \
   | jq '.tag_name' \
-  | xargs -I {} echo Lockpick_RCM.bin {} >> ../description.txt
-curl -sL https://api.github.com/repos/saneki/Lockpick_RCM/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Lockpick_RCM.bin"' \
+  | xargs -I {} echo Lockpick_RCM {} >> ../description.txt
+curl -sL https://api.github.com/repos/impeeza/Lockpick_RCMDecScots/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Lockpick_RCM[^"]*.zip"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Lockpick_RCM.bin
+  | xargs -I {} curl -sL {} -o Lockpick_RCM.zip
 if [ $? -ne 0 ]; then
     echo "Lockpick_RCM download\033[31m failed\033[0m."
 else
     echo "Lockpick_RCM download\033[32m success\033[0m."
+    unzip -oq Lockpick_RCM.zip
     mv Lockpick_RCM.bin ./bootloader/payloads
+    rm Lockpick_RCM.zip
 fi
 
 ### Fetch latest TegraExplorer.bin form https://github.com/suchmememanyskill/TegraExplorer/releases/latest
@@ -300,6 +303,8 @@ else
     mv appstore.nro ./switch/HB-App-Store
 fi
 
+mkdir -p ./switch/.overlays
+
 ### Fetch nx-ovlloader from https://github.com/ppkantorski/nx-ovlloader/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
   | jq '.tag_name' \
@@ -316,8 +321,6 @@ else
     unzip -oq nx-ovlloader.zip
     rm nx-ovlloader.zip
 fi
-
-mkdir -p ./switch/.overlays
 
 ### Fetch lastest Ultrahand-Overlay from https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest
 curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
