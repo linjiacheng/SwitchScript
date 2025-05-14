@@ -156,20 +156,32 @@ else
     mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
 fi
 
-### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/latest
-curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
+### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/tag/658
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
   | jq '.tag_name' \
   | xargs -I {} echo DBI {} >> ../description.txt
-curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o DBI.nro
 if [ $? -ne 0 ]; then
+    echo "DBI 658 download\033[31m failed\033[0m."
+else
+    echo "DBI 658 download\033[32m success\033[0m."
+    mkdir -p ./switch/DBI
+    mv DBI.nro ./switch/DBI
+fi
+
+### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/latest
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o DBI.nro.ru
+if [ $? -ne 0 ]; then
     echo "DBI download\033[31m failed\033[0m."
 else
     echo "DBI download\033[32m success\033[0m."
-    mkdir -p ./switch/DBI
-    mv DBI.nro ./switch/DBI
+    mv DBI.nro.ru ./switch/DBI
 fi
 
 ### Fetch lastest Hekate-toolbox from https://github.com/WerWolv/Hekate-Toolbox/releases/latest
@@ -342,6 +354,30 @@ else
     unzip -oq lang.zip -d ./config/ultrahand/lang/
     mv ovlmenu.ovl ./switch/.overlays
     rm lang.zip
+    cat > ./config/ultrahand/config.ini << ENDOFFILE
+[ultrahand]
+default_lang=zh-cn
+ENDOFFILE
+    cat > ./config/ultrahand/overlays.ini << ENDOFFILE
+[ovlSysmodules.ovl]
+priority=1
+custom_name=系统模块
+[sys-patch-overlay.ovl]
+priority=2
+custom_name=签名补丁
+[Status-Monitor-Overlay.ovl]
+priority=3
+custom_name=状态监控
+[sys-clk-overlay.ovl]
+priority=4
+custom_name=硬件超频
+[Fizeau.ovl]
+priority=5
+custom_name=色彩调整
+[emuiibo.ovl]
+priority=6
+custom_name=Amiibo模拟
+ENDOFFILE
 fi
 
 ### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
@@ -478,38 +514,31 @@ autoboot=0
 autoboot_list=0
 bootwait=3
 backlight=100
-noticker=0
 autohosoff=1
 autonogc=1
-updater2p=0
-bootprotect=0
-
-[Fusee]
-icon=bootloader/res/icon_ams.bmp
-payload=bootloader/payloads/fusee.bin
+updater2p=1
 
 [CFW (emuMMC)]
-emummcforce=1
 fss0=atmosphere/package3
 kip1patch=nosigchk
-; kip1=atmosphere/kips/loader.kip
+emummcforce=1
 atmosphere=1
 icon=bootloader/res/icon_Atmosphere_emunand.bmp
 id=cfw-emu
 
-[CFW (sysMMC)]
-emummc_force_disable=1
+[CFW (sysNAND)]
 fss0=atmosphere/package3
 kip1patch=nosigchk
+emummc_force_disable=1
 atmosphere=1
 icon=bootloader/res/icon_Atmosphere_sysnand.bmp
 id=cfw-sys
 
-[Stock SysNAND]
-emummc_force_disable=1
+[OFW (SysNAND)]
 fss0=atmosphere/package3
-icon=bootloader/res/icon_stock.bmp
+emummc_force_disable=1
 stock=1
+icon=bootloader/res/icon_stock.bmp
 id=ofw-sys
 ENDOFFILE
 if [ $? -ne 0 ]; then
@@ -598,6 +627,10 @@ cat > ./atmosphere/config/system_settings.ini << ENDOFFILE
 ; 禁用将错误报告上传到任天堂
 upload_enabled = u8!0x0
 
+[usb]
+; 开启USB3.0，尾数改为0是关闭
+usb30_force_enabled = u8!0x1
+
 [ro]
 ; 控制 RO 是否应简化其对 NRO 的验证。
 ; （注意：这通常不是必需的，可以使用 IPS 补丁。
@@ -624,16 +657,6 @@ add_defaults_to_dns_hosts = u8!0x1
 
 ; 是否将蓝牙配对数据库用与虚拟系统
 enable_external_bluetooth_db = u8!0x1
-
-[usb]
-; 开启USB3.0，尾数改为0是关闭
-usb30_force_enabled = u8!0x1
-
-[tc]
-sleep_enabled = u8!0x0
-holdable_tskin = u32!0xEA60
-tskin_rate_table_console = str!”[[-1000000, 28000, 0, 0], [28000, 42000, 0, 51], [42000, 48000, 51, 102], [48000, 55000, 102, 153], [55000, 60000, 153, 255], [60000, 68000, 255, 255]]”
-tskin_rate_table_handheld = str!”[[-1000000, 28000, 0, 0], [28000, 42000, 0, 51], [42000, 48000, 51, 102], [48000, 55000, 102, 153], [55000, 60000, 153, 255], [60000, 68000, 255, 255]]”
 ENDOFFILE
 if [ $? -ne 0 ]; then
     echo "Writing system_settings.ini in ./atmosphere/config\033[31m failed\033[0m."

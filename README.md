@@ -6,7 +6,7 @@
   - 大气层三件套
     - [x] `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases/latest)
     - [x] `Hekate + Nyx 简体中文` [From Here](https://github.com/easyworld/hekate/releases/latest)
-    - [x] `Sigpatches` [From Here](https://hackintendo.com/download/sigpatches)
+    - [x] `Sigpatches` [From Here](https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543)
   - Payload插件
     - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/saneki/Lockpick_RCM/releases/latest)
     - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/suchmememanyskill/TegraExplorer/releases/latest)
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-05-14 更新 `ultrahand` 配置文件等、增加 `DBI` 英文版
 - 2025-05-11 更新 `Atmosphère`、`sigpatches`、`Lockpick_RCM` 下载链接
 - 2025-04-27 整理脚本，更新`DBI`至最新版
 - 2024-12-18 更新 `sigpatches`下载链接，添加 `sysmodules`、`StatusMonitor`
