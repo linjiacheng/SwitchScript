@@ -83,28 +83,26 @@ else
     mv fusee.bin ./bootloader/payloads
 fi
 
-### Fetch latest Lockpick_RCM.bin https://github.com/impeeza/Lockpick_RCMDecScots/releases/latest
-curl -sL https://api.github.com/repos/impeeza/Lockpick_RCMDecScots/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Lockpick_RCM {} >> ../description.txt
-curl -sL https://api.github.com/repos/impeeza/Lockpick_RCMDecScots/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Lockpick_RCM[^"]*.zip"' \
+### Fetch latest Lockpick_RCM.bin from https://github.com/zdm65477730/Lockpick_RCMDecScots/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Lockpick_RCMDecScots/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Lockpick_RCMDecScots/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Lockpick_RCM.bin"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Lockpick_RCM.zip
+  | xargs -I {} curl -sL {} -o Lockpick_RCM.bin
 if [ $? -ne 0 ]; then
     echo "Lockpick_RCM download\033[31m failed\033[0m."
 else
     echo "Lockpick_RCM download\033[32m success\033[0m."
-    unzip -oq Lockpick_RCM.zip
     mv Lockpick_RCM.bin ./bootloader/payloads
-    rm Lockpick_RCM.zip
 fi
 
-### Fetch latest TegraExplorer.bin form https://github.com/suchmememanyskill/TegraExplorer/releases/latest
-curl -sL https://api.github.com/repos/suchmememanyskill/TegraExplorer/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo TegraExplorer {} >> ../description.txt
-curl -sL https://api.github.com/repos/suchmememanyskill/TegraExplorer/releases/latest \
+### Fetch latest TegraExplorer.bin from https://github.com/zdm65477730/TegraExplorer/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/TegraExplorer/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/TegraExplorer/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*TegraExplorer.bin"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o TegraExplorer.bin
@@ -115,10 +113,10 @@ else
     mv TegraExplorer.bin ./bootloader/payloads
 fi
 
-### Fetch latest CommonProblemResolver.bin form https://github.com/zdm65477730/CommonProblemResolver/releases/latest
+### Fetch latest CommonProblemResolver.bin from https://github.com/zdm65477730/CommonProblemResolver/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/CommonProblemResolver/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo CommonProblemResolver {} >> ../description.txt
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/zdm65477730/CommonProblemResolver/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*CommonProblemResolver.bin"' \
   | sed 's/"//g' \
@@ -158,9 +156,6 @@ fi
 
 ### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/tag/658
 curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
-  | jq '.tag_name' \
-  | xargs -I {} echo DBI {} >> ../description.txt
-curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o DBI.nro
@@ -173,6 +168,9 @@ else
 fi
 
 ### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/latest
+curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
+  | jq '.tag_name' \
+  | xargs -I {} echo DBI {} and 658en >> ../description.txt
 curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
   | sed 's/"//g' \
@@ -202,8 +200,8 @@ fi
 
 ### Fetch lastest NX-Activity-Log from https://github.com/zdm65477730/NX-Activity-Log/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo NX-Activity-Log {} >> ../description.txt
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.nro"' \
   | sed 's/"//g' \
@@ -250,8 +248,8 @@ fi
 
 ### Fetch lastest wiliwili from https://github.com/xfangfang/wiliwili/releases/latest
 curl -sL https://api.github.com/repos/xfangfang/wiliwili/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo wiliwili {} >> ../description.txt
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/xfangfang/wiliwili/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*wiliwili-NintendoSwitch.zip"' \
   | sed 's/"//g' \
@@ -269,8 +267,8 @@ fi
 
 ### Fetch lastest Switchfin from https://github.com/dragonflylee/switchfin/releases/latest
 curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Switchfin {} >> ../description.txt
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*Switchfin.nro"' \
   | sed 's/"//g' \
@@ -301,8 +299,8 @@ fi
 
 ### Fetch lastest hb-appstore from https://github.com/fortheusers/hb-appstore/releases/latest
 curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo HB-App-Store {} >> ../description.txt
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*appstore.nro"' \
   | sed 's/"//g' \
@@ -317,11 +315,11 @@ fi
 
 mkdir -p ./switch/.overlays
 
-### Fetch nx-ovlloader from https://github.com/ppkantorski/nx-ovlloader/releases/latest
-curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo nx-ovlloader {} >> ../description.txt
-curl -sL https://api.github.com/repos/ppkantorski/nx-ovlloader/releases/latest \
+### Fetch nx-ovlloader from https://github.com/zdm65477730/nx-ovlloader/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/nx-ovlloader/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/nx-ovlloader/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*nx-ovlloader.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o nx-ovlloader.zip
@@ -334,41 +332,35 @@ else
     rm nx-ovlloader.zip
 fi
 
-### Fetch lastest Ultrahand-Overlay from https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest
-curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Ultrahand Overlay {} >> ../description.txt
-curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*lang.zip"' \
+### Fetch lastest Ultrahand-Overlay from https://github.com/zdm65477730/Ultrahand-Overlay/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Ultrahand-Overlay/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Ultrahand-Overlay/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Ultrahand.zip"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o lang.zip
-curl -sL https://api.github.com/repos/ppkantorski/Ultrahand-Overlay/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*ovlmenu.ovl"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o ovlmenu.ovl
+  | xargs -I {} curl -sL {} -o Ultrahand.zip
 if [ $? -ne 0 ]; then
     echo "Ultrahand-Overlay download\033[31m failed\033[0m."
 else
     echo "Ultrahand-Overlay download\033[32m success\033[0m."
-    mkdir -p ./config/ultrahand/lang
-    unzip -oq lang.zip -d ./config/ultrahand/lang/
-    mv ovlmenu.ovl ./switch/.overlays
-    rm lang.zip
-    cat > ./config/ultrahand/config.ini << ENDOFFILE
+    unzip -oq Ultrahand.zip
+    rm Ultrahand.zip
+    cat > ./config/Ultrahand/config.ini << ENDOFFILE
 [ultrahand]
 default_lang=zh-cn
 ENDOFFILE
-    cat > ./config/ultrahand/overlays.ini << ENDOFFILE
-[ovlSysmodules.ovl]
+    cat > ./config/Ultrahand/overlays.ini << ENDOFFILE
+[ovl-sysmodules.ovl]
 priority=1
 custom_name=系统模块
 [sys-patch-overlay.ovl]
 priority=2
 custom_name=签名补丁
-[Status-Monitor-Overlay.ovl]
+[StatusMonitor.ovl]
 priority=3
 custom_name=状态监控
-[sys-clk-overlay.ovl]
+[sys-clk.ovl]
 priority=4
 custom_name=硬件超频
 [Fizeau.ovl]
@@ -380,11 +372,11 @@ custom_name=Amiibo模拟
 ENDOFFILE
 fi
 
-### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
-curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo emuiibo {} >> ../description.txt
-curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
+### Fetch lastest emuiibo from https://github.com/zdm65477730/emuiibo/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o emuiibo.zip
@@ -394,19 +386,15 @@ else
     echo "emuiibo download\033[32m success\033[0m."
     mkdir -p ./atmosphere/contents/0100000000000352emuiibo
     unzip -oq emuiibo.zip
-    mv SdOut/atmosphere/contents/0100000000000352 ./atmosphere/contents
-    mv SdOut/emuiibo ./
-    mv SdOut/switch/.overlays/emuiibo.ovl ./switch/.overlays
-    rm -rf SdOut
     rm emuiibo.zip
 fi
 
-### Fetch lastest Fizeau from https://github.com/averne/Fizeau/releases/latest
-curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Fizeau {} >> ../description.txt
-curl -sL https://api.github.com/repos/averne/Fizeau/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau[^"]*.zip"' \
+### Fetch lastest Fizeau from https://github.com/zdm65477730/Fizeau/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o Fizeau.zip
 if [ $? -ne 0 ]; then
@@ -418,41 +406,43 @@ else
     rm Fizeau.zip
 fi
 
-### Fetch ovlSysmodules from https://github.com/ppkantorski/ovl-sysmodules/releases/latest
-curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Sysmodules {} >> ../description.txt
-curl -sL https://api.github.com/repos/ppkantorski/ovl-sysmodules/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
+### Fetch ovlSysmodules from https://github.com/zdm65477730/ovl-sysmodules/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/ovl-sysmodules/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/ovl-sysmodules/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*ovl-sysmodules.zip"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o ovlSysmodules.ovl
+  | xargs -I {} curl -sL {} -o ovl-sysmodules.zip
 if [ $? -ne 0 ]; then
     echo "ovlSysmodules download\033[31m failed\033[0m."
 else
     echo "ovlSysmodules download\033[32m success\033[0m."
-    mv ovlSysmodules.ovl ./switch/.overlays
+    unzip -oq ovl-sysmodules.zip
+    rm ovl-sysmodules.zip
 fi
 
-### Fetch Status-Monitor-Overlay from https://github.com/ppkantorski/Status-Monitor-Overlay/releases/latest
-curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Status-Monitor-Overlay {} >> ../description.txt
-curl -sL https://api.github.com/repos/ppkantorski/Status-Monitor-Overlay/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*.ovl"' \
+### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*StatusMonitor.zip"' \
   | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Status-Monitor-Overlay.ovl
+  | xargs -I {} curl -sL {} -o StatusMonitor.zip
 if [ $? -ne 0 ]; then
-    echo "Status-Monitor-Overlay download\033[31m failed\033[0m."
+    echo "StatusMonitor download\033[31m failed\033[0m."
 else
-    echo "Status-Monitor-Overlay download\033[32m success\033[0m."
-    mv Status-Monitor-Overlay.ovl ./switch/.overlays
+    echo "StatusMonitor download\033[32m success\033[0m."
+    unzip -oq StatusMonitor.zip
+    rm StatusMonitor.zip
 fi
 
-### Fetch sys-patch from https://github.com/impeeza/sys-patch/releases/latest
-curl -sL https://api.github.com/repos/impeeza/sys-patch/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo sys-patch {} >> ../description.txt
-curl -sL https://api.github.com/repos/impeeza/sys-patch/releases/latest \
+### Fetch sys-patch from https://github.com/zdm65477730/sys-patch/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/sys-patch/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/sys-patch/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*sys-patch[^"]*.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o sys-patch.zip
@@ -465,11 +455,11 @@ else
     rm sys-patch.zip
 fi
 
-### Fetch sys-clk from https://github.com/retronx-team/sys-clk/releases/latest
-curl -sL https://api.github.com/repos/retronx-team/sys-clk/releases/latest \
+### Fetch sys-clk from https://github.com/zdm65477730/sys-clk/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/sys-clk/releases/latest \
   | jq '.tag_name' \
   | xargs -I {} echo sys-clk {} >> ../description.txt
-curl -sL https://api.github.com/repos/retronx-team/sys-clk/releases/latest \
+curl -sL https://api.github.com/repos/zdm65477730/sys-clk/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*sys-clk[^"]*.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o sys-clk.zip
@@ -480,7 +470,6 @@ else
     mkdir -p ./atmosphere/contents/00FF0000636C6BFFsys-clk
     unzip -oq sys-clk.zip
     rm sys-clk.zip
-    rm README.md
 fi
 
 ### Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest

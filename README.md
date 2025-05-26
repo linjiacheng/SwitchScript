@@ -8,8 +8,8 @@
     - [x] `Hekate + Nyx 简体中文` [From Here](https://github.com/easyworld/hekate/releases/latest)
     - [x] `Sigpatches` [From Here](https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543)
   - Payload插件
-    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/saneki/Lockpick_RCM/releases/latest)
-    - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/suchmememanyskill/TegraExplorer/releases/latest)
+    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/zdm65477730/Lockpick_RCMDecScots/releases/latest)
+    - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/zdm65477730/TegraExplorer/releases/latest)
     - [x] Hekate下删除主题和关闭插件自动启动 `CommonProblemResolver` [From Here](https://github.com/zdm65477730/CommonProblemResolver/releases/latest)
   - Nro插件
     - [x] 联网检测是否屏蔽任天堂服务器 `Switch_90DNS_tester` [From Here](https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest)
@@ -25,28 +25,28 @@
     - [ ] ~~Mod下载器 `SimpleModDownloader` [From Here](https://github.com/PoloNX/SimpleModDownloader/releases/latest)~~
     - [x] Jellyfin客户端 `Switchfin` [From Here](https://github.com/dragonflylee/switchfin/releases/latest)
     - [x] 串流工具 `Moonlight` [From Here](https://github.com/XITRIX/Moonlight-Switch/releases/latest)
-    - [ ] ~~文件管理 `NX-Shell` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
+    - [ ] ~~文件管理 `NX-Shell` [From Here](https://github.com/zdm65477730/NX-Shell/releases/latest)~~
     - [x] 黑商店 `hb-appstore`  [From Here](https://github.com/fortheusers/hb-appstore/releases/latest)
     - [ ] ~~系统升级工具 `daybreak`  [From Here](https://www.tekqart.com/thread-258184-1-1.html)~~
 
   - 补丁
     - [ ] ~~主题破解 `theme-patches` [From Here](https://github.com/exelix11/theme-patches)~~
   - Ultrahand
-    - [x] 加载器 `nx-ovlloader` [From Here](https://github.com/ppkantorski/nx-ovlloader/releases/latest)
-    - [x] 菜单 `Ultrahand-Overlay` [From Here](https://github.com/ppkantorski/Ultrahand-Overlay/releases/latest)
+    - [x] 加载器 `nx-ovlloader` [From Here](https://github.com/zdm65477730/nx-ovlloader/releases/latest)
+    - [x] 菜单 `Ultrahand-Overlay` [From Here](https://github.com/zdm65477730/Ultrahand-Overlay/releases/latest)
   - Ovl插件
-    - [ ] ~~金手指工具 `EdiZon` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [ ] 系统模块 `ovl-sysmodules` [From Here](https://github.com/ppkantorski/ovl-sysmodules/releases/latest)
-    - [ ] 系统监视 `StatusMonitor` [From Here](https://github.com/ppkantorski/Status-Monitor-Overlay/releases/latest)
-    - [ ] ~~掌机底座模式切换 `ReverseNX-RT` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [ ] ~~局域网联机 `ldn_mitm` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/XorTroll/emuiibo/releases/latest)
-    - [ ] ~~时间同步 `QuickNTP` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [x] 色彩调整 `Fizeau` [From Here](https://github.com/averne/Fizeau/releases/latest)
+    - [ ] ~~金手指工具 `EdiZon` [From Here](https://github.com/zdm65477730/EdiZon-Overlay/releases/latest)~~
+    - [x] 系统模块 `ovl-sysmodules` [From Here](https://github.com/zdm65477730/ovl-sysmodules/releases/latest)
+    - [x] 系统监视 `StatusMonitor` [From Here](https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest)
+    - [ ] ~~掌机底座模式切换 `ReverseNX-RT` [From Here](https://github.com/zdm65477730/ReverseNX-RT/releases/latest)~~
+    - [ ] ~~局域网联机 `ldn_mitm` [From Here](https://github.com/zdm65477730/ldn_mitm/releases/latest)~~
+    - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/zdm65477730/emuiibo/releases/latest)
+    - [ ] ~~时间同步 `QuickNTP` [From Here](https://github.com/zdm65477730/QuickNTP/releases/latest)~~
+    - [x] 色彩调整 `Fizeau` [From Here](https://github.com/zdm65477730/Fizeau/releases/latest)
     - [ ] ~~金手指工具 `Zing` [From Here](https://www.tekqart.com/thread-222735-1-1.html)~~
-    - [ ] ~~后台音乐 `sys-tune` [From Here](https://www.tekqart.com/thread-370954-1-1.html)~~
-    - [x] 系统补丁 `sys-patch` [From Here](https://github.com/impeeza/sys-patch/releases/latest)
-    - [x] 超频插件 `sys-clk` [From Here](https://github.com/retronx-team/sys-clk/releases/latest)
+    - [ ] ~~后台音乐 `sys-tune` [From Here](https://github.com/HookedBehemoth/sys-tune/releases/latest)~~
+    - [x] 系统补丁 `sys-patch` [From Here](https://github.com/zdm65477730/sys-patch/releases/latest)
+    - [x] 超频插件 `sys-clk` [From Here](https://github.com/zdm65477730/sys-clk/releases/latest)
     - [x] ~~调频插件 `OC Toolkit` [From Here](https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest)~~
 
   - 其他
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-05-26 更新 zdm65477730 大佬的插件地址
 - 2025-05-14 更新 `ultrahand` 配置文件等、增加 `DBI` 英文版
 - 2025-05-11 更新 `Atmosphère`、`sigpatches`、`Lockpick_RCM` 下载链接
 - 2025-04-27 整理脚本，更新`DBI`至最新版
