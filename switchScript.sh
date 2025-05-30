@@ -59,7 +59,7 @@ else
 fi
 
 ### Fetch Sigpatches from https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543/
-curl -sL "https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/plugins/Hekate+AMS-package3-sigpatches-1.9.0P-cfw-20.0.1_V1.zip" -o sigpatches.zip
+curl -sL "https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/plugins/sigpatches.zip" -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
@@ -366,44 +366,13 @@ custom_name=硬件超频
 [Fizeau.ovl]
 priority=5
 custom_name=色彩调整
-[emuiibo.ovl]
+[EdiZon.ovl]
 priority=6
+custom_name=游戏作弊
+[emuiibo.ovl]
+priority=7
 custom_name=Amiibo模拟
 ENDOFFILE
-fi
-
-### Fetch lastest emuiibo from https://github.com/zdm65477730/emuiibo/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o emuiibo.zip
-if [ $? -ne 0 ]; then
-    echo "emuiibo download\033[31m failed\033[0m."
-else
-    echo "emuiibo download\033[32m success\033[0m."
-    mkdir -p ./atmosphere/contents/0100000000000352emuiibo
-    unzip -oq emuiibo.zip
-    rm emuiibo.zip
-fi
-
-### Fetch lastest Fizeau from https://github.com/zdm65477730/Fizeau/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Fizeau.zip
-if [ $? -ne 0 ]; then
-    echo "Fizeau download\033[31m failed\033[0m."
-else
-    echo "Fizeau download\033[32m success\033[0m."
-    mkdir -p ./atmosphere/contents/0100000000000F12Fizeau
-    unzip -oq Fizeau.zip
-    rm Fizeau.zip
 fi
 
 ### Fetch ovlSysmodules from https://github.com/zdm65477730/ovl-sysmodules/releases/latest
@@ -420,22 +389,6 @@ else
     echo "ovlSysmodules download\033[32m success\033[0m."
     unzip -oq ovl-sysmodules.zip
     rm ovl-sysmodules.zip
-fi
-
-### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*StatusMonitor.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o StatusMonitor.zip
-if [ $? -ne 0 ]; then
-    echo "StatusMonitor download\033[31m failed\033[0m."
-else
-    echo "StatusMonitor download\033[32m success\033[0m."
-    unzip -oq StatusMonitor.zip
-    rm StatusMonitor.zip
 fi
 
 ### Fetch sys-patch from https://github.com/zdm65477730/sys-patch/releases/latest
@@ -455,6 +408,22 @@ else
     rm sys-patch.zip
 fi
 
+### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*StatusMonitor.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o StatusMonitor.zip
+if [ $? -ne 0 ]; then
+    echo "StatusMonitor download\033[31m failed\033[0m."
+else
+    echo "StatusMonitor download\033[32m success\033[0m."
+    unzip -oq StatusMonitor.zip
+    rm StatusMonitor.zip
+fi
+
 ### Fetch sys-clk from https://github.com/zdm65477730/sys-clk/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/sys-clk/releases/latest \
   | jq '.tag_name' \
@@ -470,6 +439,56 @@ else
     mkdir -p ./atmosphere/contents/00FF0000636C6BFFsys-clk
     unzip -oq sys-clk.zip
     rm sys-clk.zip
+fi
+
+### Fetch lastest Fizeau from https://github.com/zdm65477730/Fizeau/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o Fizeau.zip
+if [ $? -ne 0 ]; then
+    echo "Fizeau download\033[31m failed\033[0m."
+else
+    echo "Fizeau download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/0100000000000F12Fizeau
+    unzip -oq Fizeau.zip
+    rm Fizeau.zip
+fi
+
+### Fetch lastest EdiZon-Overlay from https://github.com/zdm65477730/EdiZon-Overlay/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/EdiZon-Overlay/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/EdiZon-Overlay/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*EdiZon.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o EdiZon-Overlay.zip
+if [ $? -ne 0 ]; then
+    echo "EdiZon-Overlay download\033[31m failed\033[0m."
+else
+    echo "EdiZon-Overlay download\033[32m success\033[0m."
+    unzip -oq EdiZon-Overlay.zip
+    rm EdiZon-Overlay.zip
+fi
+
+### Fetch lastest emuiibo from https://github.com/zdm65477730/emuiibo/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o emuiibo.zip
+if [ $? -ne 0 ]; then
+    echo "emuiibo download\033[31m failed\033[0m."
+else
+    echo "emuiibo download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/contents/0100000000000352emuiibo
+    unzip -oq emuiibo.zip
+    rm emuiibo.zip
 fi
 
 ### Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
@@ -502,13 +521,13 @@ cat > ./bootloader/hekate_ipl.ini << ENDOFFILE
 autoboot=0
 autoboot_list=0
 bootwait=3
-backlight=100
-autohosoff=1
+autohosoff=0
 autonogc=1
 updater2p=1
+backlight=100
 
 [CFW (emuMMC)]
-fss0=atmosphere/package3
+pkg3=atmosphere/package3
 kip1patch=nosigchk
 emummcforce=1
 atmosphere=1
@@ -516,7 +535,7 @@ icon=bootloader/res/icon_Atmosphere_emunand.bmp
 id=cfw-emu
 
 [CFW (sysNAND)]
-fss0=atmosphere/package3
+pkg3=atmosphere/package3
 kip1patch=nosigchk
 emummc_force_disable=1
 atmosphere=1
@@ -524,7 +543,7 @@ icon=bootloader/res/icon_Atmosphere_sysnand.bmp
 id=cfw-sys
 
 [OFW (SysNAND)]
-fss0=atmosphere/package3
+pkg3=atmosphere/package3
 emummc_force_disable=1
 stock=1
 icon=bootloader/res/icon_stock.bmp

@@ -35,7 +35,7 @@
     - [x] 加载器 `nx-ovlloader` [From Here](https://github.com/zdm65477730/nx-ovlloader/releases/latest)
     - [x] 菜单 `Ultrahand-Overlay` [From Here](https://github.com/zdm65477730/Ultrahand-Overlay/releases/latest)
   - Ovl插件
-    - [ ] ~~金手指工具 `EdiZon` [From Here](https://github.com/zdm65477730/EdiZon-Overlay/releases/latest)~~
+    - [x] 金手指工具 `EdiZon` [From Here](https://github.com/zdm65477730/EdiZon-Overlay/releases/latest)
     - [x] 系统模块 `ovl-sysmodules` [From Here](https://github.com/zdm65477730/ovl-sysmodules/releases/latest)
     - [x] 系统监视 `StatusMonitor` [From Here](https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest)
     - [ ] ~~掌机底座模式切换 `ReverseNX-RT` [From Here](https://github.com/zdm65477730/ReverseNX-RT/releases/latest)~~
@@ -70,6 +70,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-05-29 更新 `sigpatches` ，增加 `EdiZon-Overlay`
 - 2025-05-26 更新 zdm65477730 大佬的插件地址
 - 2025-05-14 更新 `ultrahand` 配置文件等、增加 `DBI` 英文版
 - 2025-05-11 更新 `Atmosphère`、`sigpatches`、`Lockpick_RCM` 下载链接
