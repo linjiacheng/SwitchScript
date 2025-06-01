@@ -371,7 +371,7 @@ priority=6
 custom_name=游戏作弊
 [emuiibo.ovl]
 priority=7
-custom_name=Amiibo模拟
+custom_name=虚拟Amiibo
 ENDOFFILE
 fi
 
@@ -474,11 +474,11 @@ else
     rm EdiZon-Overlay.zip
 fi
 
-### Fetch lastest emuiibo from https://github.com/zdm65477730/emuiibo/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+### Fetch lastest emuiibo from https://github.com/XorTroll/emuiibo/releases/latest
+curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
   | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+  | xargs -I {} echo emuiibo {} >> ../description.txt
+curl -sL https://api.github.com/repos/XorTroll/emuiibo/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o emuiibo.zip
@@ -488,6 +488,10 @@ else
     echo "emuiibo download\033[32m success\033[0m."
     mkdir -p ./atmosphere/contents/0100000000000352emuiibo
     unzip -oq emuiibo.zip
+    mv SdOut/atmosphere/contents/0100000000000352 ./atmosphere/contents
+    mv SdOut/emuiibo ./
+    mv SdOut/switch/.overlays/emuiibo.ovl ./switch/.overlays
+    rm -rf SdOut
     rm emuiibo.zip
 fi
 
