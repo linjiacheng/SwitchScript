@@ -8,15 +8,15 @@ set -e
 # -------------------------------------------
 
 ### Create a few new folders for storing files
-if [ -d SwitchSD ]; then
-  rm -rf SwitchSD
+if [ -d Copy_to_SD ]; then
+  rm -rf Copy_to_SD
 fi
 if [ -e description.txt ]; then
   rm -rf description.txt
 fi
 
-mkdir -p SwitchSD
-cd SwitchSD
+mkdir -p Copy_to_SD
+cd Copy_to_SD
 
 ### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases
 curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases \
@@ -139,20 +139,20 @@ else
 fi
 
 ### Fetch lastest Switch_90DNS_tester from https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest
-curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo Switch_90DNS_tester {} >> ../description.txt
-curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Switch_90DNS_tester.nro"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Switch_90DNS_tester.nro
-if [ $? -ne 0 ]; then
-    echo "Switch_90DNS_tester download\033[31m failed\033[0m."
-else
-    echo "Switch_90DNS_tester download\033[32m success\033[0m."
-    mkdir -p ./switch/Switch_90DNS_tester
-    mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
-fi
+# curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
+#   | jq '.tag_name' \
+#   | xargs -I {} echo Switch_90DNS_tester {} >> ../description.txt
+# curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*Switch_90DNS_tester.nro"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o Switch_90DNS_tester.nro
+# if [ $? -ne 0 ]; then
+#     echo "Switch_90DNS_tester download\033[31m failed\033[0m."
+# else
+#     echo "Switch_90DNS_tester download\033[32m success\033[0m."
+#     mkdir -p ./switch/Switch_90DNS_tester
+#     mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
+# fi
 
 ### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/tag/658
 curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
@@ -180,6 +180,22 @@ if [ $? -ne 0 ]; then
 else
     echo "DBI download\033[32m success\033[0m."
     mv DBI.nro.ru ./switch/DBI
+fi
+
+### Fetch lastest Goldleaf from https://github.com/XorTroll/Goldleaf/releases/latest
+curl -sL https://api.github.com/repos/XorTroll/Goldleaf/releases/latest \
+  | jq '.tag_name' \
+  | xargs -I {} echo Goldleaf {} >> ../description.txt
+curl -sL https://api.github.com/repos/XorTroll/Goldleaf/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*Goldleaf.nro"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o Goldleaf.nro
+if [ $? -ne 0 ]; then
+    echo "Goldleaf download\033[31m failed\033[0m."
+else
+    echo "Goldleaf download\033[32m success\033[0m."
+    mkdir -p ./switch/Goldleaf
+    mv Goldleaf.nro ./switch/Goldleaf
 fi
 
 ### Fetch lastest Hekate-toolbox from https://github.com/WerWolv/Hekate-Toolbox/releases/latest
@@ -231,20 +247,20 @@ else
 fi
 
 ### Fetch lastest aio-switch-updater from https://github.com/HamletDuFromage/aio-switch-updater/releases/latest
-curl -sL https://api.github.com/repos/HamletDuFromage/aio-switch-updater/releases/latest \
-  | jq '.tag_name' \
-  | xargs -I {} echo aio-switch-updater {} >> ../description.txt
-curl -sL https://api.github.com/repos/HamletDuFromage/aio-switch-updater/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*aio-switch-updater.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o aio-switch-updater.zip
-if [ $? -ne 0 ]; then
-    echo "aio-switch-updater download\033[31m failed\033[0m."
-else
-    echo "aio-switch-updater download\033[32m success\033[0m."
-    unzip -oq aio-switch-updater.zip
-    rm aio-switch-updater.zip
-fi
+# curl -sL https://api.github.com/repos/HamletDuFromage/aio-switch-updater/releases/latest \
+#   | jq '.tag_name' \
+#   | xargs -I {} echo aio-switch-updater {} >> ../description.txt
+# curl -sL https://api.github.com/repos/HamletDuFromage/aio-switch-updater/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*aio-switch-updater.zip"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o aio-switch-updater.zip
+# if [ $? -ne 0 ]; then
+#     echo "aio-switch-updater download\033[31m failed\033[0m."
+# else
+#     echo "aio-switch-updater download\033[32m success\033[0m."
+#     unzip -oq aio-switch-updater.zip
+#     rm aio-switch-updater.zip
+# fi
 
 ### Fetch lastest wiliwili from https://github.com/xfangfang/wiliwili/releases/latest
 curl -sL https://api.github.com/repos/xfangfang/wiliwili/releases/latest \
@@ -371,7 +387,7 @@ priority=6
 custom_name=游戏作弊
 [emuiibo.ovl]
 priority=7
-custom_name=Amiibo模拟
+custom_name=虚拟Amiibo
 ENDOFFILE
 fi
 
@@ -491,29 +507,29 @@ else
     rm emuiibo.zip
 fi
 
-### Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
-# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-#   | jq '.tag_name' \
-#   | xargs -I {} echo OC Toolkit {} >> ../description.txt
-# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-#   | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip"' \
-#   | sed 's/"//g' \
-#   | xargs -I {} curl -sL {} -o kip.zip
-# curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
-#   | grep -oP '"browser_download_url": "\Khttps://[^"]*OC.Toolkit.u.zip"' \
-#   | sed 's/"//g' \
-#   | xargs -I {} curl -sL {} -o OC.Toolkit.u.zip
-# if [ $? -ne 0 ]; then
-#     echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
-# else
-#     echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
-#     mkdir -p ./atmosphere/kips
-#     unzip -oq kip.zip -d ./atmosphere/kips/
-#     mkdir -p ./switch/.packages
-#     unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
-#     rm kip.zip
-#     rm OC.Toolkit.u.zip
-# fi
+## Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
+curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+  | jq '.tag_name' \
+  | xargs -I {} echo OC Toolkit {} >> ../description.txt
+curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o kip.zip
+curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*OC.Toolkit.u.zip"' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o OC.Toolkit.u.zip
+if [ $? -ne 0 ]; then
+    echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
+else
+    echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
+    mkdir -p ./atmosphere/kips
+    unzip -oq kip.zip -d ./atmosphere/kips/
+    mkdir -p ./switch/.packages
+    unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
+    rm kip.zip
+    rm OC.Toolkit.u.zip
+fi
 
 ### Write hekate_ipl.ini in /bootloader/
 cat > ./bootloader/hekate_ipl.ini << ENDOFFILE

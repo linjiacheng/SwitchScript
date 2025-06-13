@@ -36,7 +36,7 @@ jobs:
           echo "tag_name=$(date +%Y%m%d)" >> $GITHUB_ENV
           chmod +x $SCRIPT_SH
           ./$SCRIPT_SH
-          zip -rq SwitchSD.zip SwitchSD
+          zip -rq Copy_to_SD.zip Copy_to_SD
 
       - name: Read description.txt
         id: description
@@ -53,7 +53,7 @@ jobs:
           commit: main
           token: ${{ secrets.actions_release }}
           body: "${{ steps.description.outputs.content }}"
-          artifacts: "SwitchSD.zip"
+          artifacts: "Copy_to_SD.zip"
 
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.3.4
@@ -68,5 +68,5 @@ jobs:
         with:
           token: ${{ secrets.actions_release }}
           repository: ${{ github.repository }}
-          retain_days: 7
+          retain_days: 5
           keep_minimum_runs: 6
