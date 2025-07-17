@@ -14,7 +14,7 @@
   - Nro插件
     - [ ] ~~联网检测是否屏蔽任天堂服务器 `Switch_90DNS_tester` [From Here](https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest)~~
     - [x] 游戏安装，存档管理和文件传输工具 `DBI` [From Here](https://github.com/rashevskyv/dbi/releases/latest)
-    - [x] 金叶子工具箱 `Goldleaf` [From Here](https://github.com/XorTroll/Goldleaf/releases/latest)
+    - [ ] ~~金叶子工具箱 `Goldleaf` [From Here](https://github.com/XorTroll/Goldleaf/releases/latest)~~
     - [ ] ~~游戏安装和文件传输工具 `Awoo Installer` [From Here](https://github.com/dragonflylee/Awoo-Installer/releases/latest)~~
     - [x] 深海工具箱 `Hekate-toolbox` [From Here](https://github.com/WerWolv/Hekate-Toolbox/releases/latest)
     - [x] 游戏游玩时间记录工具 `NX-Activity-Log` [From Here](https://github.com/zdm65477730/NX-Activity-Log/releases/latest)
@@ -71,6 +71,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-07-17 增加 `Goldleaf`，更新 `sigpatches`
 - 2025-06-13 增加 `Goldleaf`，删除 `Switch_90DNS_tester`、`aio-switch-updater`
 - 2025-05-29 更新 `sigpatches` ，增加 `EdiZon-Overlay`
 - 2025-05-26 更新 zdm65477730 大佬的插件地址
