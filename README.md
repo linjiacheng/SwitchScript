@@ -76,6 +76,7 @@
 
 ## 更新日志
 
+- 2025-09-30 更新 `sigpatches`
 - 2025-09-03 更新 `sigpatches`
 - 2025-07-31 更新 `sigpatches`
 - 2025-07-17 删除 `Goldleaf`，更新 `sigpatches`
@@ -118,7 +119,3 @@
 - 2023-05-04 更新脚本
 - 2023-04-28 更新脚本，自动生成 Release 内容
 - 2023-04-27 添加 Github Action 自动打包代码
-
-## 截图
-
-![](https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/screenshot/screenshot.png)

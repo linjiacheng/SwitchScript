@@ -138,22 +138,6 @@ else
     rm logo.zip
 fi
 
-### Fetch lastest Switch_90DNS_tester from https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest
-# curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
-#   | jq '.tag_name' \
-#   | xargs -I {} echo Switch_90DNS_tester {} >> ../description.txt
-# curl -sL https://api.github.com/repos/meganukebmp/Switch_90DNS_tester/releases/latest \
-#   | grep -oP '"browser_download_url": "\Khttps://[^"]*Switch_90DNS_tester.nro"' \
-#   | sed 's/"//g' \
-#   | xargs -I {} curl -sL {} -o Switch_90DNS_tester.nro
-# if [ $? -ne 0 ]; then
-#     echo "Switch_90DNS_tester download\033[31m failed\033[0m."
-# else
-#     echo "Switch_90DNS_tester download\033[32m success\033[0m."
-#     mkdir -p ./switch/Switch_90DNS_tester
-#     mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
-# fi
-
 ### Fetch lastest DBI from https://github.com/rashevskyv/dbi/releases/tag/658
 curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657 \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro"' \
@@ -392,11 +376,12 @@ else
     rm sys-patch.zip
 fi
 
-### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
-  | jq '.name' \
+### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases?per_page=2 \
+  | jq '.[0].name' \
   | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases?per_page=2 \
+  | jq '.[0]' \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*StatusMonitor.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o StatusMonitor.zip
