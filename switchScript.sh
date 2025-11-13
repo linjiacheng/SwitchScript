@@ -58,13 +58,19 @@ else
     rm hekate.zip
 fi
 
-### Fetch Sigpatches from https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543/
-curl -sL "https://raw.githubusercontent.com/linjiacheng/SwitchScript/main/plugins/sigpatches.zip" -o sigpatches.zip
+### Fetch Sigpatches from https://github.com/NexlifyHub/SystemEnhancer/releases/latest
+curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest \
+  | jq '.name' \
+  | xargs -I {} echo {} >> ../description.txt
+curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest \
+  | jq '.[0]' \
+  | grep -oP '"browser_download_url": "\Khttps://[^"]*SystemEnhancer[^"]*.zip' \
+  | sed 's/"//g' \
+  | xargs -I {} curl -sL {} -o sigpatches.zip
 if [ $? -ne 0 ]; then
     echo "sigpatches download\033[31m failed\033[0m."
 else
     echo "sigpatches download\033[32m success\033[0m."
-    echo sigpatches  >> ../description.txt
     unzip -oq sigpatches.zip
     rm sigpatches.zip
 fi
@@ -314,11 +320,14 @@ else
     echo "Ultrahand-Overlay download\033[32m success\033[0m."
     unzip -oq Ultrahand.zip
     rm Ultrahand.zip
-    cat > ./config/Ultrahand/config.ini << ENDOFFILE
+fi
+
+### Write Ultrahand config files
+cat > ./config/Ultrahand/config.ini << ENDOFFILE
 [ultrahand]
 default_lang=zh-cn
 ENDOFFILE
-    cat > ./config/Ultrahand/overlays.ini << ENDOFFILE
+cat > ./config/Ultrahand/overlays.ini << ENDOFFILE
 [ovl-sysmodules.ovl]
 priority=1
 custom_name=系统模块
@@ -341,7 +350,6 @@ custom_name=游戏作弊
 priority=7
 custom_name=虚拟Amiibo
 ENDOFFILE
-fi
 
 ### Fetch ovlSysmodules from https://github.com/zdm65477730/ovl-sysmodules/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/ovl-sysmodules/releases/latest \
@@ -376,12 +384,11 @@ else
     rm sys-patch.zip
 fi
 
-### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases?per_page=2 \
-  | jq '.[0].name' \
+### Fetch StatusMonitor from https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
+  | jq '.name' \
   | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases?per_page=2 \
-  | jq '.[0]' \
+curl -sL https://api.github.com/repos/zdm65477730/Status-Monitor-Overlay/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*StatusMonitor.zip"' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o StatusMonitor.zip

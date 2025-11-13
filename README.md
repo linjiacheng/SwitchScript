@@ -76,6 +76,7 @@
 
 ## 更新日志
 
+- 2025-11-13 更新 `sigpatches` 仓库地址
 - 2025-09-30 更新 `sigpatches`
 - 2025-09-03 更新 `sigpatches`
 - 2025-07-31 更新 `sigpatches`
