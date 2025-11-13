@@ -60,8 +60,8 @@ fi
 
 ### Fetch Sigpatches from https://github.com/NexlifyHub/SystemEnhancer/releases/latest
 curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
+  | jq '.tag_name' \
+  | xargs -I {} echo sigpatches {} >> ../description.txt
 curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*SystemEnhancer[^"]*.zip' \
   | sed 's/"//g' \
