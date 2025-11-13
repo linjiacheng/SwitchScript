@@ -63,7 +63,6 @@ curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest 
   | jq '.name' \
   | xargs -I {} echo {} >> ../description.txt
 curl -sL https://api.github.com/repos/NexlifyHub/SystemEnhancer/releases/latest \
-  | jq '.[0]' \
   | grep -oP '"browser_download_url": "\Khttps://[^"]*SystemEnhancer[^"]*.zip' \
   | sed 's/"//g' \
   | xargs -I {} curl -sL {} -o sigpatches.zip
