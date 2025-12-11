@@ -339,15 +339,15 @@ custom_name=状态监控
 [sys-clk.ovl]
 priority=4
 custom_name=硬件超频
-[Fizeau.ovl]
-priority=5
-custom_name=色彩调整
 [EdiZon.ovl]
-priority=6
+priority=5
 custom_name=游戏作弊
-[emuiibo.ovl]
-priority=7
-custom_name=虚拟Amiibo
+# [Fizeau.ovl]
+# priority=6
+# custom_name=色彩调整
+# [emuiibo.ovl]
+# priority=7
+# custom_name=虚拟Amiibo
 ENDOFFILE
 
 ### Fetch ovlSysmodules from https://github.com/zdm65477730/ovl-sysmodules/releases/latest
@@ -417,21 +417,21 @@ else
 fi
 
 ### Fetch lastest Fizeau from https://github.com/zdm65477730/Fizeau/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o Fizeau.zip
-if [ $? -ne 0 ]; then
-    echo "Fizeau download\033[31m failed\033[0m."
-else
-    echo "Fizeau download\033[32m success\033[0m."
-    mkdir -p ./atmosphere/contents/0100000000000F12Fizeau
-    unzip -oq Fizeau.zip
-    rm Fizeau.zip
-fi
+# curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+#   | jq '.name' \
+#   | xargs -I {} echo {} >> ../description.txt
+# curl -sL https://api.github.com/repos/zdm65477730/Fizeau/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*Fizeau.zip"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o Fizeau.zip
+# if [ $? -ne 0 ]; then
+#     echo "Fizeau download\033[31m failed\033[0m."
+# else
+#     echo "Fizeau download\033[32m success\033[0m."
+#     mkdir -p ./atmosphere/contents/0100000000000F12Fizeau
+#     unzip -oq Fizeau.zip
+#     rm Fizeau.zip
+# fi
 
 ### Fetch lastest EdiZon-Overlay from https://github.com/zdm65477730/EdiZon-Overlay/releases/latest
 curl -sL https://api.github.com/repos/zdm65477730/EdiZon-Overlay/releases/latest \
@@ -450,21 +450,21 @@ else
 fi
 
 ### Fetch lastest emuiibo from https://github.com/zdm65477730/emuiibo/releases/latest
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
-  | jq '.name' \
-  | xargs -I {} echo {} >> ../description.txt
-curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
-  | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
-  | sed 's/"//g' \
-  | xargs -I {} curl -sL {} -o emuiibo.zip
-if [ $? -ne 0 ]; then
-    echo "emuiibo download\033[31m failed\033[0m."
-else
-    echo "emuiibo download\033[32m success\033[0m."
-    mkdir -p ./atmosphere/contents/0100000000000352emuiibo
-    unzip -oq emuiibo.zip
-    rm emuiibo.zip
-fi
+# curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+#   | jq '.name' \
+#   | xargs -I {} echo {} >> ../description.txt
+# curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest \
+#   | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip"' \
+#   | sed 's/"//g' \
+#   | xargs -I {} curl -sL {} -o emuiibo.zip
+# if [ $? -ne 0 ]; then
+#     echo "emuiibo download\033[31m failed\033[0m."
+# else
+#     echo "emuiibo download\033[32m success\033[0m."
+#     mkdir -p ./atmosphere/contents/0100000000000352emuiibo
+#     unzip -oq emuiibo.zip
+#     rm emuiibo.zip
+# fi
 
 ## Fetch lastest OC_Toolkit_SC_EOS from https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest
 curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest \
